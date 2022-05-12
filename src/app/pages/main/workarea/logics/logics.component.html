@@ -4,6 +4,39 @@
 			<h3>Logic Setting</h3>
 			<button nz-button nzGhost nzType="primary" class="add-logic-btn">add logic sets</button>
 		</div>
+		<div class="logic-list">
+			<div class="logic-item">
+				<div class="condition-wrap">
+					<span>If</span>
+					<nz-select style="width: 240px;" nzPlaceHolder="please choose one item">
+						<nz-option nzValue="0" nzLabel="Q1"></nz-option>
+						<nz-option nzValue="0" nzLabel="Q2"></nz-option>
+					</nz-select>
+					<nz-select style="width: 120px;">
+						<nz-option nzValue="0" nzLabel="selected"></nz-option>
+						<nz-option nzValue="0" nzLabel="unselected"></nz-option>
+					</nz-select>
+					<nz-select style="width: 180px;">
+						<nz-option nzValue="0" nzLabel="Option 1"></nz-option>
+						<nz-option nzValue="0" nzLabel="Option 2"></nz-option>
+					</nz-select>
+					<i class="fa fa-plus-square-o"></i>
+				</div>
+				<div class="split"></div>
+				<div class="result-wrap">
+					<span>otherwise</span>
+					<nz-select style="width: 120px;">
+						<nz-option nzValue="0" nzLabel="display"></nz-option>
+						<nz-option nzValue="0" nzLabel="hidden"></nz-option>
+					</nz-select>
+					<nz-select style="width: 240px;">
+						<nz-option nzValue="0" nzLabel="Quertion 1"></nz-option>
+						<nz-option nzValue="0" nzLabel="Quertion 2"></nz-option>
+					</nz-select>
+					<i class="fa fa-plus-square-o"></i>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div nz-col nzSpan="12" class="logic-preview-wrap">
 		<div class="logic-title">

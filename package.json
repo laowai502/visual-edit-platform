@@ -1,5 +1,5 @@
 {
-	"name": "iqnr-platform",
+	"name": "visual-edit-platform",
 	"version": "1.0.1",
 	"scripts": {
 		"ng": "ng",

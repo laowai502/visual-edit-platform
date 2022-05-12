@@ -41,6 +41,46 @@
 		border-right: solid 1px #f0f0f0;
 	}
 
+	.logic-set-wrap {
+		.logic-list {
+			padding: 12px 18px 12px 12px;
+			.logic-item {
+				position: relative;
+				background: #f7f8fa;
+				margin-top: 6px;
+				padding: 16px 24px 16px 12px;
+				border-radius: 4px;
+				border: 1px solid #eaeaea;
+				box-sizing: border-box;
+				margin-bottom: 12px;
+				user-select: none;
+				cursor: pointer;
+				font-size: 14px;
+
+				::ng-deep {
+					nz-select {
+						margin-left: 12px;
+					}
+				}
+
+				.condition-wrap, .result-wrap {
+					padding-left: 16px;
+				}
+				.split {
+					height: 1px;
+					border-top: 1px dashed #c9c9c9;
+					margin: 12px 0;
+				}
+
+				.fa-plus-square-o {
+					margin-left: 12px;
+					color: #2672ff;
+					font-size: 14px;
+				}
+			}
+		}
+	}
+
 	.logic-wrap .logic-preview-wrap {
 		.preview-zone {
 			margin: 16px;
