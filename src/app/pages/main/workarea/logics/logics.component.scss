@@ -1,0 +1,65 @@
+@import '../../../../../theme/base.scss';
+
+:host {
+	.logic-title {
+		// font-family: Nunito, sans-serif;
+		font-size: 14px;
+		line-height: 1.5;
+		color: #484848;
+		text-align: left;
+		padding: 4px 12px;
+		position: relative;
+		&>h3 {
+			font-weight: 500;
+			&::before {
+				content: "";
+				display: inline-block;
+				width: 2px;
+				height: 14px;
+				background: #2672ff;
+				border-radius: 1px;
+				margin-right: 8px;
+				margin-top: 0px;
+			}
+		}
+		.add-logic-btn {
+			top: 0px;
+			right: 16px;
+			padding: 0 14px;
+			position: absolute;
+		}
+	}
+
+	.logic-wrap {
+		padding: 12px 16px 12px;
+		margin: 12px 20px 0px;
+		background: #FFF;
+		min-height: calc(100vh - 100px);
+	}
+
+	.logic-wrap .logic-set-wrap {
+		border-right: solid 1px #f0f0f0;
+	}
+
+	.logic-wrap .logic-preview-wrap {
+		.preview-zone {
+			margin: 16px;
+			width: 98%;
+			height: 92%;
+			border: solid 1px #cfcfcf;
+			background: linear-gradient(90deg, rgba(206, 214, 224, 0.75) 1px, transparent 0), linear-gradient(rgb(195 202 211 / 75%) 1px, transparent 0);
+			background-size: 15px 15px;
+			background-position: 11px 15px;
+			background-color: #f9f9f9;
+		}
+	}
+}
+
+// margin: 16px;
+// width: 98%;
+// height: 92%;
+// /* border: solid 1px #cfcfcf; */
+// background: linear-gradient(90deg, rgb(206 214 224) 1px, transparent 0), linear-gradient(rgb(195 202 211) 1px, transparent 0);
+// background-size: 10px 10px;
+// background-position: 10px 10px;
+// background-color: #ffffff;

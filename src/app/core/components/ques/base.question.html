@@ -1,0 +1,11 @@
+<div class="q-title-wrap">
+	<div class="q-seq" *ngIf="showFrontWrap">
+		<span *ngIf="showRequired" class="require">*</span>
+		<span *ngIf="ques.showSeq" [class.ml5]="showRequired" class="seq">{{ ques.seqNo }}.</span>
+	</div>
+	<div #q_title [attr.contenteditable]="editTileFlag" class="q-title" [class.no-style]="ques.quesTypeId === qType.SplitLine" (focus)="focusTitle()" (blur)="saveTitle()"
+		[innerHTML]="ques.quesDesc | Realhtml"></div>
+	<ng-container *ngIf="showTextFloatTool">
+		<float-text-tool [content]="ques.quesDesc" (textToolEvent)="textToolEvent($event)"></float-text-tool>
+	</ng-container>
+</div>

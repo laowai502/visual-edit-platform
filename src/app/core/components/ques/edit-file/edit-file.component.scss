@@ -1,0 +1,53 @@
+:host {
+	.edit-file-wrap {
+
+		.upload-file {
+			display: block;
+			text-align: center;
+			margin: 12px 0 12px 14px;
+			border-radius: 4px;
+			max-width: 420px;
+			height: 165px;
+			padding-top: 36px;
+			box-sizing: border-box;
+			background: #f7f8fa;
+			font-size: 14px;
+			color: #aaa;
+
+			.upload-file-icon {
+				display: block;
+				line-height: 0.5;
+				font-size: 60px;
+				font-weight: lighter;
+			}
+			.upload-title {
+				margin-top: 16px;
+				text-align: center;
+				line-height: 16px;
+			}
+			.upload-content {
+				display: block;
+				margin-top: 14px;
+				font-size: 13px;
+				line-height: 12px;
+				text-align: center;
+			}
+		}
+
+		.upload-tip {
+			margin-left: 14px;
+			text-align: left;
+			font-size: 12px;
+			color: #aaa;
+			line-height: 18px;
+			display: block;
+			width: 400px;
+			word-wrap: break-word;
+		}
+
+		.upload-img {
+
+		}
+
+	}
+}

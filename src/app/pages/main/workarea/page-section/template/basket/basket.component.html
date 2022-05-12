@@ -1,0 +1,11 @@
+<div class="ib card-1 basket-wrap">
+	<ul class="data-list" *ngIf="copyList.length > 0; else noContent">
+		<li *ngFor="let e of copyList; let i = index" draggable="true" (dragover)="$event.preventDefault()" (dragstart)="dragStart($event, e)">
+			<i class="fa {{ e.icon }}"></i><p>{{ e.seqNo + '.' }} {{ e.quesDesc }}</p>
+		</li>
+	</ul>
+</div>
+
+<ng-template #noContent>
+	<p>No content</p>
+</ng-template>

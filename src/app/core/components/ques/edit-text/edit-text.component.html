@@ -1,0 +1,33 @@
+<div class="edit-text-wrap">
+	<ng-container [ngSwitch]="quesType">
+		<ng-container *ngSwitchCase="QuesType.Text">
+			<div class="eq-text"></div>
+		</ng-container>
+		<ng-container *ngSwitchCase="QuesType.Number">
+			<div class="eq-text">only number (e.g. 998000, 0.3145)</div>
+		</ng-container>
+		<ng-container *ngSwitchCase="QuesType.TextArea">
+			<div class="eq-text text-area"></div>
+		</ng-container>
+		<ng-container *ngSwitchCase="QuesType.TypeAhead">
+			<div class="eq-text">
+				<i class="fa fa-keyboard-o"></i>
+				<i class="fa fa-globe"></i>
+			</div>
+		</ng-container>
+		<ng-container *ngSwitchCase="QuesType.Date">
+			<div class="eq-text date">
+				<i class="fa fa-calendar-check-o"></i>
+			</div>
+		</ng-container>
+		<ng-container *ngSwitchCase="QuesType.DateRange">
+			<div class="eq-text range">
+				<i class="fa fa-calendar-check-o"></i>
+			</div>
+			<hr>
+			<div class="eq-text range">
+				<i class="fa fa-calendar-check-o"></i>
+			</div>
+		</ng-container>
+	</ng-container>
+</div>

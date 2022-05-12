@@ -1,0 +1,112 @@
+<div class="setting-wrap show">
+	<nz-tabset nzSize="small" (nzSelectedIndexChange)="tabChange($event)" [nzSelectedIndex]="tabNumber">
+		<nz-tab nzTitle="Setting">
+			<nz-collapse nzAccordion nzGhost nzExpandIconPosition="right">
+				<nz-collapse-panel nzHeader="Display" nzActive="true">
+					<ng-container [ngTemplateOutlet]="Display_Form"></ng-container>
+				</nz-collapse-panel>
+				<nz-collapse-panel nzHeader="Header">
+					<ng-container [ngTemplateOutlet]="Header_Form"></ng-container>
+				</nz-collapse-panel>
+				<nz-collapse-panel nzHeader="Background">
+					<ng-container [ngTemplateOutlet]="Bg_Form"></ng-container>
+				</nz-collapse-panel>
+			</nz-collapse>
+			<div class="gs-form-item">
+				<label>Language</label>
+				<nz-select [(ngModel)]="lang">
+					<nz-option nzValue="en-us" nzLabel="English"></nz-option>
+					<nz-option nzValue="zh-cn" nzLabel="Chinese"></nz-option>
+					<nz-option nzValue="de-de" nzLabel="Deutsch"></nz-option>
+				</nz-select>
+			</div>
+		</nz-tab>
+		<!-- <nz-tab nzTitle="Question Config" [nzDisabled]="qSetTabDis"> -->
+		<nz-tab nzTitle="Question Config">
+			<ng-template nz-tab>
+				<iqnr-q-set [cq]="cq"></iqnr-q-set>
+			</ng-template>
+		</nz-tab>
+	</nz-tabset>
+</div>
+
+<ng-container *ngIf="showPicLib">
+	<iqnr-pic-lib [option]="opts" (close)="closePicLib($event)"></iqnr-pic-lib>
+</ng-container>
+
+<ng-template #Display_Form>
+	<form [formGroup]="gsForm">
+		<div class="gs-form-item">
+			<label>Display Title</label>
+			<nz-switch formControlName="showTitle"></nz-switch>
+		</div>
+		<div class="gs-form-item">
+			<label>Display Seq No.</label>
+			<nz-switch formControlName="showSeq" (ngModelChange)="showSeqChange($event)"></nz-switch>
+		</div>
+		<div class="gs-form-item">
+			<label>Display Welcome</label>
+			<nz-switch formControlName="showWel"></nz-switch>
+		</div>
+		<div class="gs-form-item">
+			<label>Display Progress</label>
+			<nz-switch nz-tooltip nzTooltipTitle="Viewing the effect through preview" formControlName="showProgress"></nz-switch>
+		</div>
+	</form>
+</ng-template>
+
+<ng-template #Header_Form>
+	<form [formGroup]="hdForm">
+		<div class="gs-form-item">
+			<label>Display Header</label>
+			<nz-switch formControlName="showHeader"></nz-switch>
+		</div>
+		<div *ngIf="hdForm.get('showHeader').value">
+			<div class="gs-form-item">
+				<label>Header Type</label>
+				<nz-radio-group formControlName="headerType">
+					<label nz-radio-button nzValue="text">text</label>
+					<label nz-radio-button nzValue="image">image</label>
+					<label nz-radio-button nzValue="slide">slide</label>
+				</nz-radio-group>
+			</div>
+			<ng-container [ngSwitch]="hdForm.get('headerType').value">
+				<div class="gs-form-item" *ngSwitchCase="'text'">
+					<label>Content</label>
+					<input type="text" class="gs-input" autocomplete="off" maxlength="100" formControlName="headerTxt">
+					<iqnr-suffix [input]="hdForm.get('headerTxt').value" mlen="100"></iqnr-suffix>
+				</div>
+				<div *ngSwitchCase="'image'">
+					<div class="gs-form-item">
+						<label>Header picture</label>
+						<span class="gs-txt-btn" (click)="addFile('single', 'header')">Add</span>
+					</div>
+				</div>
+				<div *ngSwitchCase="'slide'">
+					<div class="gs-form-item">
+						<label>Header picture<i class="fa fa-question-circle" aria-hidden="true"
+							nz-tooltip nzTooltipTitle="Multiple pictures are shown in rotation, with a maximum of 5 supported"></i></label>
+						<span class="gs-txt-btn" (click)="addFile('multiple', 'header')">Add</span>
+					</div>
+				</div>
+			</ng-container>
+		</div>
+	</form>
+</ng-template>
+
+<ng-template #Bg_Form>
+	<form [formGroup]="bgForm">
+		<div class="gs-form-item">
+			<label>BG Color</label>
+			<input type="color" class="gs-input cur" style="width: 40px;" formControlName="bgColor">
+		</div>
+		<div class="gs-form-item">
+			<label>Bottom Color</label>
+			<input type="color" class="gs-input cur" style="width: 40px;" formControlName="bColor">
+		</div>
+		<div class="gs-form-item">
+			<label>Bottom Opacity</label>
+			<nz-slider [nzMin]="0" [nzMax]="100" formControlName="bOpacity"></nz-slider>
+		</div>
+	</form>
+</ng-template>

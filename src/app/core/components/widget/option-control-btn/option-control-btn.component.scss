@@ -1,0 +1,31 @@
+:host {
+	.option-control-btns {
+		top: 2px;
+		right: 0;
+		position: absolute;
+
+		&>i.fa {
+			cursor: pointer;
+			font-size: 22px;
+			vertical-align: top;
+			width: 24px;
+			height: 24px;
+			margin-left: 24px;
+			color: #9c9c9c;
+		}
+
+		.fa-gear:hover {
+			color: #2672ff;
+		}
+
+		.minus {
+			margin-top: 1px;
+			margin-left: 18px !important;
+			background: url('../../../../../assets/images/1.png') no-repeat;
+			background-size: 46px;
+			&:hover {
+				background-position: -25px 0;
+			}
+		}
+	}
+}

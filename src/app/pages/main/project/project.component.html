@@ -1,0 +1,19 @@
+<div class="pro-wrap">
+    <div class="pro-content ib">
+        <h5>My project</h5>
+		<iqnr-filter></iqnr-filter>
+        <!-- project list -->
+        <ul class="card-list">
+			<li class="new-create-card tc" (click)="create()">
+				<div class="create-div">
+					<i class="fa fa-plus-square-o"></i>
+					<span>Create Your project</span>
+				</div>
+			</li>
+			<li class="project-card" *ngFor="let item of pList" [routerLink]="['/main/workarea']" [queryParams]="{ id: item.id, type: 'Edit' }">
+				<i class="fa fa-trash-o font16" (click)="delete($event, item.id)"></i>
+				<div class="title"><span [innerHTML]="item.projectName || 'unknown name'"></span></div>
+			</li>
+		</ul>
+    </div>
+</div>

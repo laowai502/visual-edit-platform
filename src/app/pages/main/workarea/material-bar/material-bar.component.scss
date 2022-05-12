@@ -1,0 +1,112 @@
+@import '../../../../../theme/base.scss';
+
+:host .material-bar-wrap {
+	position: fixed;
+    width: 250px;
+    left: 71px;
+    top: 66px;
+	bottom: 0;
+    z-index: 2;
+    border-right: 1px solid #dde5ed;
+    height: 100%;
+    background-color: #FFF;
+
+	.material-ques-dl {
+
+		&:first-child {
+			margin-top: 12px;
+		}
+
+		margin: 0 0 0 12px;
+    	padding-bottom: 12px;
+
+		&>dt {
+			font-size: 13px;
+			margin-bottom: 8px;
+		}
+		&>dd {
+			.qs-ty-item {
+				user-select: none;
+				padding: 0 12px 0 12px;
+				cursor: pointer;
+				display: inline-block;
+				min-width: 90px;
+				line-height: 28px;
+				color: #707070;
+				font-size: 12px;
+				border: 1px solid #eaeaea;
+				background-color: #fff;
+				border-radius: 2px;
+				margin: 0 8px 8px 0;
+				&>.fa {
+					margin-right: 8px;
+					font-size: 13px;
+				}
+
+				&:hover {
+					border: 1px solid #2672ff;
+					box-shadow: 0 1px 5px 0 rgb(38 114 255 / 20%);
+					color: #2672ff;
+				}
+			}
+		}
+
+	}
+}
+
+
+:host ::ng-deep {
+	.material-bar-wrap {
+		.ant-tabs-nav {
+			color: #707070;
+			background-color: #f7f8fa;
+			border-bottom-width: 0px;
+
+			.ant-tabs-tab.ant-tabs-tab-active {
+				background-color: #FFF;
+				border-left-width: 0px;
+				border-right-width: 0px;
+				border-bottom-width: 0px !important;
+			}
+			.ant-tabs-tab {
+				margin-right: 0px;
+				padding: 8px 20px;
+				border-top-width: 0px !important;
+				border-bottom-width: 0px !important;
+				border: 1px solid #eaeaea;
+
+				&:first-child {
+					border-left-width: 0px !important;
+				}
+				&:last-child {
+					border-right-width: 1px !important;
+				}
+				.ant-tabs-tab-btn {
+					font-size: 13px;
+					text-align: center;
+				}
+			}
+			.ant-tabs-ink-bar { /* hidden selected underline */
+				display: none !important;
+			}
+		}
+		.ant-tabs-content {
+			height: calc(100vh - 98px);
+			overflow-x: hidden;
+			// overflow-y: hidden;
+			&::-webkit-scrollbar {
+				width: 18px;
+    			height: 18px;
+			}
+			&::-webkit-scrollbar-corner {
+				background: transparent;
+			}
+			&::-webkit-scrollbar-thumb {
+				border: 6px solid transparent;
+				background: var(--palette-black-alpha-20,rgba(0, 0, 0, .2));
+				border-radius: 10px;
+				background-clip: padding-box;
+			}
+		}
+	}
+}

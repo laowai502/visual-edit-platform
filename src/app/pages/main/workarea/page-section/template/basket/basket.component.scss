@@ -1,0 +1,49 @@
+@import '../../../../../../../theme/base.scss';
+
+:host .basket-wrap {
+	position: absolute;
+	top: 16px;
+	right: 16px;
+	width: 300px;
+	background-color: #FFF;
+	padding: 16px;
+	overflow-y: auto;
+	max-height: $Remaining-height;
+
+	&>ul.data-list {
+		li {
+			user-select: none;
+			cursor: move;
+			width: 100%;
+			padding: 6px 8px;
+			display: inline-block;
+			border-radius: 4px;
+			position: relative;
+			border: 1px solid #dee2e6;
+			margin-bottom: 8px;
+			&:last-child {
+				margin-bottom: 0;
+			}
+			&:hover {
+				border: 1px solid #2672ff;
+				box-shadow: 0 1px 5px 0 rgb(38 114 255 / 20%);
+				color: #2672ff;
+			}
+		}
+		li i.fa {
+			position: absolute;
+			top: 8px;
+			left: 10px;
+			font-size: 14px;
+			color: $base-primary-color;
+		}
+		li > p {
+			padding-left: 24px;
+			font-size: 12px;
+			white-space: nowrap;
+			overflow: hidden;
+			color: #5c5c5c;
+			text-overflow: ellipsis;
+		}
+	}
+}

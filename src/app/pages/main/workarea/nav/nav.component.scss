@@ -1,0 +1,33 @@
+:host .nav-wrap {
+	position: fixed;
+    left: 0;
+    top: 66px;
+	bottom: 0px;
+    z-index: 299;
+    border-right: 1px solid #eaeaea;
+    width: 71px;
+    height: 100%;
+    background-color: #fff;
+    text-align: center;
+
+	.nav-list {
+		position: relative;
+
+		.nav-item {
+			line-height: 24px;
+			padding: 14px 10px;
+			color: #484848;
+
+			&>.fa {
+				font-size: 20px;
+			}
+		}
+		.nav-item:first-child {
+			padding-top: 18px;
+		}
+		.nav-item.active, :hover {
+			background-color: #f5f6fa;
+			color: #2672FF;
+		}
+	}
+}

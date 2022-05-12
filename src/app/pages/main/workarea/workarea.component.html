@@ -1,0 +1,13 @@
+<iqnr-q-header></iqnr-q-header>
+<div class="workarea-container" [class.edit-area-padding]="name === 'EditArea'">
+	<iqnr-nav (toggle)="togglePage($event)"></iqnr-nav>
+	<ng-container [ngSwitch]="name">
+		<ng-container *ngSwitchCase="'EditArea'">
+			<iqnr-material-bar></iqnr-material-bar>
+			<iqnr-edit-area></iqnr-edit-area>
+			<iqnr-setting [info]="pInfo"></iqnr-setting>
+		</ng-container>
+		<page-section *ngSwitchCase="'Page'"></page-section>
+		<logics *ngSwitchCase="'Logics'"></logics>
+	</ng-container>
+</div>

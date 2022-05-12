@@ -1,0 +1,18 @@
+<div class="material-bar-wrap">
+	<nz-tabset nzSize="small">
+		<nz-tab nzTitle="QuesTab">
+			<dl *ngFor="let o of quesMaterial" class="material-ques-dl">
+				<dt>{{ o.title }}</dt>
+				<dd>
+					<div *ngFor="let e of o.quesType" class="qs-ty-item" (dblclick)="dbclickType(e)"
+						draggable="true" (dragover)="dragOver($event)" (dragstart)="dragStart($event, e)">
+						<i class="fa {{ e.icon }}"></i>
+						<span>{{ e.name }}</span>
+					</div>
+				</dd>
+			</dl>
+		</nz-tab>
+		<nz-tab nzTitle="Library"></nz-tab>
+		<!-- <nz-tab nzTitle="Tab 3">Content of Tab Pane 3</nz-tab> -->
+	</nz-tabset>
+</div>

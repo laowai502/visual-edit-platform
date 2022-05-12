@@ -1,0 +1,20 @@
+<header>
+	<div class="q-header-left">
+		<i [routerLink]="['/main/project']" class="fa fa-hand-o-left cur" nz-tooltip nzTooltipTitle="Go back to project list page"></i>
+		<span class="p-name" [class.unactive]="pName === 'Your Project Name'">{{ pName | RemoveHtmlTag }}</span>
+	</div>
+	<div class="q-header-center">
+		<nz-breadcrumb nzSeparator=">">
+			<nz-breadcrumb-item><span [class.active]="step === 1">Working</span></nz-breadcrumb-item>
+			<nz-breadcrumb-item><span [class.active]="step === 2">Previewing</span></nz-breadcrumb-item>
+		</nz-breadcrumb>
+	</div>
+	<div class="q-header-right">
+		<i class="fa fa-comments-o cur" nz-tooltip [nzTooltipTitle]="commentTooltip"></i>
+		<i class="fa fa-question-circle-o cur" nz-tooltip [nzTooltipTitle]="infoTooltip"></i>
+		<button nz-button nzType="primary" style="padding: 0 16px">Publish and share</button>
+		<button nz-button nzType="primary" style="padding: 0 16px" nzGhost (click)="preview()">
+			<i class="fa fa-eye"></i>Preview</button>
+		<button nz-button nzType="primary" style="padding: 0 16px" nzGhost (click)="save()">Save</button>
+	</div>
+</header>

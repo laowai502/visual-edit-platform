@@ -1,0 +1,16 @@
+<div class="option-operate-group">
+	<a (click)="addOption()"><i class="fa add"></i>Add an item</a>
+	<a (click)="isVisible=true"><i class="fa batch-add"></i>Batch add items</a>
+</div>
+<nz-modal [(nzVisible)]="isVisible" nzWrapClassName="batch-add-option-modal" nzWidth="580px"
+	[nzStyle]="{ top: '25%' }" [nzAutofocus]="null" (nzOnCancel)="handleCancel()" [nzContent]="modalContent" [nzFooter]="modalFooter" >
+	<ng-template #modalContent>
+		<h5>Batch add options</h5>
+		<p>Each row represents an option, and you can add multiple options</p>
+		<textarea class="batch-area" [(ngModel)]="optionText"></textarea>
+	</ng-template>
+	<ng-template #modalFooter>
+		<button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
+		<button nz-button nzType="primary" [disabled]="!optionText" (click)="handleOk()">Save</button>
+	</ng-template>
+</nz-modal>

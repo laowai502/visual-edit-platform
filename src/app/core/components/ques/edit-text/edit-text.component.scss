@@ -1,0 +1,56 @@
+:host .edit-text-wrap {
+	width: 75%;
+	margin-top: 12px;
+	padding-left: 18px;
+
+	.eq-text {
+		width: 100%;
+		height: 32px;
+		max-width: 550px;
+		box-sizing: border-box;
+		border: 1px solid #d8d8d8;
+		border-radius: 3px;
+		background-color: #fff;
+		color: #b5b5b5;
+		padding: 6px 8px;
+		font-size: 13px;
+		position: relative;
+		margin-bottom: 10px;
+
+		.fa {
+			font-size: 18px;
+			color: #747474;
+			position: absolute;
+			&.fa-calendar-check-o, &.fa-globe {
+				right: 8px;
+			}
+			&.fa-keyboard-o {
+				left: 8px;
+			}
+		}
+	}
+
+	.eq-text.range {
+		margin-top: 6px;
+		max-width: 187px;
+		display: inline-block;
+		vertical-align: middle;
+
+		& + hr {
+			width: 8px;
+			margin: 0 8px;
+			display: inline-block;
+			vertical-align: middle;
+		}
+	}
+
+	.eq-text.date {
+		max-width: 400px;
+	}
+
+	.eq-text.text-area {
+		height: 64px;
+		border-radius: 4px;
+		margin-bottom: 12px;
+	}
+}

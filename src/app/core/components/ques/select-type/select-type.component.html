@@ -1,0 +1,16 @@
+<div class="edit-option-list">
+	<ul class="edit-option-ul" sortable-list="sortable-list" [class.mb8]="!ques.focus">
+		<li class="edit-option-item" *ngFor="let o of ques.options; let i = index;" sortable-item="sortable-item"
+			(mouseenter)="o.showOperateBtn = true" (mouseleave)="o.showOperateBtn = false" draggable="false">
+			<i *ngIf="(o.showOperateBtn || o.focus || o.optsMoving) && type === 'EDIT'" class="move-points" nz-tooltip nzTooltipTitle="Long press and drag"
+				(mousedown)="removeOtherFocus(o, i)" drag-sortable [position]="i" (DragSortEmitter)="dragSort($event, i, o)"></i>
+			<div class="option-wrap">
+				<i [class]="iconType"></i>
+				<div [id]="'option_content_' + o.optionId" class="option-content" [class.focus]="o.focus"
+					(focus)="optionContentFocus(o)" [attr.contenteditable]="type === 'EDIT'" [innerHTML]="o.optionDesc"></div>
+			</div>
+			<option-control *ngIf="(o.showOperateBtn || o.focus) && type === 'EDIT'" [qType]="ques?.quesTypeId" (removeOpt)="removeOption($event, o)"></option-control>
+		</li>
+	</ul>
+	<option-operat *ngIf="ques.focus && type === 'EDIT'" (addOptsEmitter)="addOptions($event)"></option-operat>
+</div>

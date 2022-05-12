@@ -1,0 +1,68 @@
+<div class="template-wrap">
+	<iqnr-basket *ngIf="calling"></iqnr-basket>
+	<div class="card-1 template-container">
+		<ng-container [ngSwitch]="pInfo.templateId">
+			<ng-container *ngSwitchCase="1" [ngTemplateOutlet]="Left_Menu_Temp"></ng-container>
+			<ng-container *ngSwitchCase="2" [ngTemplateOutlet]="Horization_Tab_Temp"></ng-container>
+			<ng-container *ngSwitchCase="4" [ngTemplateOutlet]="Anchor_Temp"></ng-container>
+			<ng-container *ngSwitchDefault [ngTemplateOutlet]="Pagination_Temp"></ng-container>
+		</ng-container>
+	</div>
+</div>
+
+<ng-template #Left_Menu_Temp>
+	<div class="Left_Menu_Temp">
+		<div class="menu" style="">
+			<h3 class="tip-title">Your menu content</h3>
+			<ul nz-menu nzMode="inline" nzTheme="light" style="min-height: inherit; border-right: none;">
+				<ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: ps.editSectionInfo?.editSectionData }"></ng-container>
+				<ng-template #menuTpl let-menus>
+					<ng-container *ngFor="let menu of menus">
+						<li *ngIf="!menu.children" nz-menu-item [nzPaddingLeft]="menu.level * 24" [id]="menu.id" [nzDisabled]="menu.disabled" [nzSelected]="menu.selected">
+							<div *ngIf="menu.type === 'edit'" (click)="addSameLevel(menu, menus)">
+								<i class="fa {{ menu.icon }} mr12"></i>
+								<span>{{ menu.title }}</span>
+							</div>
+							<div class="edit-sec" *ngIf="menu.type === 'real'" (click)="clickMenu(menu)">
+								<i class="fa {{ menu.icon }} mr12"></i>
+								<span class="edit-title" contenteditable="true" [innerHTML]="menu.title | Realhtml" (blur)="saveMenuItemTitle(menu)"></span>
+								<i *ngIf="!menu.children" class="close" (click)="removeSec(menu, menus)">×</i>
+								<i class="set fa fa-cogs" nz-tooltip nzTooltipTitle="Clicking and setting it as parent" (click)="setParent(menu)"></i>
+							</div>
+						</li>
+						<li *ngIf="menu.children" nz-submenu [nzPaddingLeft]="menu.level * 24" [id]="menu.id"
+							[nzOpen]="menu.open" [nzTitle]="fatherTemp" [nzDisabled]="menu.disabled">
+							<ng-template #fatherTemp>
+								<div class="edit-sec edit-father">
+									<i class="fa {{ menu.icon }} mr12"></i>
+									<span class="edit-title" contenteditable="true" [innerHTML]="menu.title | Realhtml" (blur)="saveMenuItemTitle(menu)"></span>
+									<i *ngIf="menu.children?.length === 1" class="close" (click)="removeSec(menu, menus)">×</i>
+								</div>
+							</ng-template>
+							<ul><ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menu.children }"></ng-container></ul>
+						</li>
+					</ng-container>
+				</ng-template>
+			</ul>
+		</div>
+	</div>
+	<edit-zone [item]="curSec"></edit-zone>
+</ng-template>
+
+<ng-template #Horization_Tab_Temp>
+	<div>
+
+	</div>
+</ng-template>
+
+<ng-template #Anchor_Temp>
+	<div>
+
+	</div>
+</ng-template>
+
+<ng-template #Pagination_Temp>
+	<div>
+
+	</div>
+</ng-template>

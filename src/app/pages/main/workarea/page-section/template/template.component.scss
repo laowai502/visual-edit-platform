@@ -1,0 +1,77 @@
+@import '../../../../../../theme/base.scss';
+
+$Left_Menu_Temp_width: 280px;
+
+:host .template-wrap {
+	position: relative;
+	padding: 16px 20px 0 20px;
+
+	.template-container {
+		margin-right: 320px;
+		background-color: #FFF;
+		min-height: $Remaining-height;
+	}
+}
+
+.Left_Menu_Temp {
+	width: $Left_Menu_Temp_width;
+	min-height: inherit;
+	display: inline-block;
+	vertical-align: top;
+
+	.menu {
+		min-height: inherit;
+		padding-top: 16px;
+		border-right: 1px solid #f0f0f0;
+	}
+
+	::ng-deep {
+		.ant-menu-submenu-arrow {
+			right: 24px;
+		}
+		.ant-menu-submenu:hover, .ant-menu-item:hover {
+			i.close {
+				display: inline !important;
+			}
+		}
+	}
+
+	.edit-sec {
+		color: $base-font-color;
+		position: relative;
+		i.set {
+			display: none;
+			position: absolute;
+			top: 14px;
+			right: 20px;
+			color: $base-font-color;
+			&:hover {
+				color: $base-primary-color;
+			}
+		}
+		i.close {
+			display: none;
+			position: absolute;
+			right: -6px;
+			top: -10px;
+			font-style: inherit;
+    		font-size: 16px;
+			color: $base-primary-color;
+			&:hover {
+				opacity: .5;
+			}
+		}
+		&:hover, &:focus {
+			color: $base-primary-color;
+			i.set, i.close {
+				display: inline;
+			}
+		}
+	}
+	.edit-sec.edit-father {
+		i.close {
+			right: -26px;
+		}
+	}
+}
+

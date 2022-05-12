@@ -1,0 +1,31 @@
+:host {
+
+	.action-bar {
+		position: absolute;
+		top: 20px;
+		right: 28px;
+
+		&>.fa {
+			font-size: 18px;
+			color: #9c9c9c;
+			margin-right: 28px;
+			cursor: pointer;
+
+			&:not(.dis) {
+				&:hover {
+					color: #2672ff;
+				}
+			}
+
+			&:last-child {
+				margin-right: 0px;
+			}
+		}
+	}
+
+	.dis {
+		pointer-events: none;
+		cursor: not-allowed !important;
+	}
+
+}

@@ -1,0 +1,15 @@
+<div class="text-float-tool">
+	<i class="fa fa-file-picture-o text-float-tool-item" nz-tooltip nzTooltipTitle="Insert icon"></i>
+	<i class="fa fa-text-width text-float-tool-item" nz-tooltip nzTooltipTitle="Advanced Editing" (click)="isVisible=true;"></i>
+</div>
+<nz-modal [(nzVisible)]="isVisible" nzWrapClassName="rich-text-modal" nzClosable="false" nzWidth="720px" [nzStyle]="{ top: '25%' }" [nzAutofocus]="null"
+	[nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()">
+	<ng-template #modalTitle>Advanced Editor</ng-template>
+	<ng-template #modalContent>
+		<editor class="float-text-tool-editor" [init]="editor" [(ngModel)]="content"></editor>
+	</ng-template>
+	<ng-template #modalFooter>
+		<button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
+		<button nz-button nzType="primary" (click)="handleOk()">Save</button>
+	</ng-template>
+</nz-modal>

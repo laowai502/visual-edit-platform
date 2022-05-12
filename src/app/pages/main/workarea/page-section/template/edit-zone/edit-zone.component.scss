@@ -1,0 +1,91 @@
+@import '../../../../../../../theme/base.scss';
+@import '../../../../../../../theme/animation.scss';
+@import '../template.component.scss';
+
+:host .content-zone {
+	padding: 16px 24px;
+	display: inline-block;
+	vertical-align: top;
+	width: calc(100% - #{$Left_Menu_Temp_width});
+	height: calc(100vh - 120px);
+    overflow: auto;
+
+	.drop-zone {
+		border: 1px dashed #bbb;
+		background: #fff;
+		border-radius: 6px;
+		cursor: pointer;
+		padding: 20px;
+		text-align: center;
+		&>h3 {
+			margin: 1rem 0;
+			color: #46484a;
+			font-weight: 500;
+			font-size: 14px;
+		}
+	}
+	.add-panel-btn {
+		margin: 12px 0;
+	}
+
+	.content-wrapper {
+		.content-item {
+			position: relative;
+			vertical-align: top;
+			margin-bottom: 12px;
+			margin-right: 4px;
+			padding: 8px 24px;
+			border: 1px dashed #bbb;
+			&:hover {
+				border-color: $base-primary-color;
+				.fa-trash-o {
+					display: initial;
+				}
+			}
+			.fa-trash-o {
+				display: none;
+			}
+		}
+		// .content-item.ques-appear-animation {
+		// 	animation: show_normal .3s ease-in-out;
+		// }
+	}
+
+
+	::ng-deep {
+		nz-collapse-panel {
+			.ant-collapse-arrow {
+				top: 10px;
+    			left: 3px;
+			}
+			.ant-collapse-header {
+				padding: 6px 0 3px;
+				padding-left: 24px;
+				.fa-trash-o {
+					display: none;
+				}
+				&:hover {
+					.fa-trash-o {
+						display: initial;
+					}
+				}
+			}
+			.ant-collapse-content .ant-collapse-content-box {
+				padding-left: 5px;
+				padding-right: 0;
+				padding-top: 6px;
+			}
+		}
+	}
+
+	.fa-trash-o {
+		right: 10px;
+		cursor: pointer;
+		position: absolute;
+		&:hover {
+			color: $base-primary-color;
+		}
+	}
+
+}
+

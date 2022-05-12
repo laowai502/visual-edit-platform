@@ -1,0 +1,39 @@
+@mixin mode {
+	.grid-mode:before {
+		position: absolute;
+		content: "";
+		width: 1px;
+		height: 12px;
+		background: #d8d8d8;
+		right: -1px;
+		top: 7px;
+	}
+	.grid-mode, .table-mode {
+		width: 50%;
+		display: inline-block;
+		line-height: 28px;
+		position: relative;
+		font-size: 14px;
+
+		&.active {
+			color: #40a9ff;
+		}
+	}
+}
+
+:host {
+	.filter-container {
+		margin-top: 12px;
+
+		&>.list-type {
+			width: 73px;
+			height: 28px;
+			background: #fff;
+			border-radius: 2px;
+			border: 1px solid #eaeaea;
+
+			@include mode;
+		}
+
+	}
+}

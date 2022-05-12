@@ -1,0 +1,14 @@
+@keyframes show_normal {
+	0% {
+		width: 50%;
+		// transform: translateX(-20%) translateY(-20%);
+		// transform:scale(0.3);
+		opacity: .5;
+	}
+	100% {
+		width: 100%;
+		// transform: translateX(0) translateY(0);
+		// transform: translateX(0);
+		opacity: 1;
+	}
+}

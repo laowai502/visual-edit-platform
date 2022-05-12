@@ -1,0 +1,7 @@
+<div class="action-bar">
+	<i class="fa fa-arrows" [class.dis]="quesList.length <= 1" data-no-focus="true"
+		nz-tooltip nzTooltipTitle="Long press and drag question" (mousedown)="selectDrag($event)"></i>
+	<i *ngIf="showCopyAndLogic" data-no-focus="true" class="fa fa-files-o" nz-tooltip nzTooltipTitle="Copy question" (click)="copyEditQues()"></i>
+	<i *ngIf="showCopyAndLogic" data-no-focus="true" class="fa fa-random" nz-tooltip nzTooltipTitle="Logic setting"></i>
+	<i class="fa fa-trash-o" data-no-focus="true" style="font-size: 20px;" nz-tooltip nzTooltipTitle="Delete question" (click)="delEditQr($event)"></i>
+</div>

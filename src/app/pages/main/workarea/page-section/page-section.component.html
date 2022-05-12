@@ -1,0 +1,47 @@
+<div class="page-section-wrap card" *ngIf="!pInfo.templateId else TemplateArea">
+	<div class="need-enable-wrap">
+		<div class="enable-area">
+			<nz-switch [(ngModel)]="pInfo.enablePagelayout" (ngModelChange)="saveState($event)" style="vertical-align: super;"></nz-switch>
+			<h3 class="ib">Enable</h3>
+		</div>
+		<div class="mess">
+			<p style="margin-bottom: 6px;"><b>Setting up your page layout</b></p>
+			<p class="text-muted">You can adjust your page structure and section layout. Now choose one template that
+				suits you and start setting it up.</p>
+		</div>
+	</div>
+	<div class="choose-template" *ngIf="pInfo.enablePagelayout">
+		<div class="layout-template-wrap">
+			<h4>Choose layout mode</h4>
+			<div *ngFor="let o of templates" class="card-1 layout-template hover-style-1" (click)="view(o)">
+				<p class="tit">{{ o.name }}
+					<i class="fa fa-heart"><span>{{ o.like }}</span></i>
+					<i class="fa fa-eye"><span>{{ o.view }}</span></i>
+				</p>
+				<div class="img-wrap">
+					<img src="{{ './assets/images/template/' + o.jpgs[0] }}" alt="">
+				</div>
+				<p class="desc">{{ o.desc }}</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<nz-modal [(nzVisible)]="isVisible" nzWrapClassName="template-view-modal" nzWidth="1200px" [nzStyle]="{ top: '5%' }"
+	[nzAutofocus]="null" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="handleCancel()">
+	<ng-template #modalContent>
+		<nz-carousel nzEffect="scrollx">
+			<div style="height: 780px;" nz-carousel-content *ngFor="let index of curTemplatesPic">
+				<img style="margin: 0 auto;" src="{{ './assets/images/template/' + index }}" alt="">
+			</div>
+		</nz-carousel>
+		<div class="use-it">
+			<button nz-button nzType="primary" (click)="handleOk()">Use it</button>
+		</div>
+		<div class="clear"></div>
+	</ng-template>
+</nz-modal>
+
+<ng-template #TemplateArea>
+	<iqnr-template></iqnr-template>
+</ng-template>

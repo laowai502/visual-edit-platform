@@ -1,0 +1,27 @@
+<ng-container *ngIf="ques.quesTypeId === quesType.ScaleQuestion">
+	<div class="edit-scale-wrap">
+		<ul class="scale-render-list">
+			<li *ngFor="let o of renderList">
+				<i class="fa fa-circle-thin"></i>
+				<span>{{ o.label }}</span>
+			</li>
+		</ul>
+		<div class="label-wrap mb8">
+			<div class="flex-left">{{ exleTxt }}</div>
+			<div *ngIf="exlCenTxt !== ''" class="flex-center">{{ exlCenTxt }}</div>
+			<div class="flex-right">{{ exlRiTxt }}</div>
+		</div>
+	</div>
+</ng-container>
+<ng-container *ngIf="ques.quesTypeId === quesType.Score">
+	<div class="score-ques-wrap">
+		<div class="score" *ngFor="let o of renderList">
+			<i class="fa fa-star-o"></i>
+		</div>
+		<div class="label-wrap" style="padding-left: 0;">
+			<div class="flex-left" *ngIf="exleTxt !== ''">{{ exleTxt }}</div>
+			<div *ngIf="exlCenTxt !== ''" class="flex-center">{{ exlCenTxt }}</div>
+			<div class="flex-right" *ngIf="exlRiTxt !== ''">{{ exlRiTxt }}</div>
+		</div>
+	</div>
+</ng-container>

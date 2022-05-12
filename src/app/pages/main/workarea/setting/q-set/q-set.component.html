@@ -1,0 +1,317 @@
+<div class="ques-setting-detail" *ngIf="cq; else noSelect">
+	<div *ngIf="cq.quesTypeId !== quesType.SplitLine; else splitLine"
+		class="title" [title]="cq?.quesDesc">Q{{ cq?.seqNo }}. {{ cq?.quesDesc }}</div>
+	<ng-container [ngSwitch]="cq.quesTypeId">
+		<ng-container *ngSwitchCase="quesType.SplitLine"></ng-container>
+		<ng-container *ngSwitchCase="quesType.Label">
+			<div class="set-part">
+				<h3 style="padding-top: 14px;">Detail setting</h3>
+				<h5>{{ cq?.name }}</h5>
+				<div class="set-box">
+					<div class="gs-form-item">
+						<label>Layout<i class="fa fa-question-circle" nz-tooltip [nzTooltipTitle]="EffectInPreview" aria-hidden="true"></i></label>
+						<nz-radio-group [(ngModel)]="nObj.layout" (ngModelChange)="changeRadio($event, 'layout')">
+							<label nz-radio-button [nzValue]="1">col</label>
+							<label nz-radio-button [nzValue]="2">2cols</label>
+							<label nz-radio-button [nzValue]="3">3cols</label>
+						</nz-radio-group>
+					</div>
+					<div class="gs-form-item">
+						<label>Logics<i class="fa fa-question-circle" nz-tooltip [nzTooltipTitle]="EffectInPreview" aria-hidden="true"></i></label>
+						<span class="gs-txt-btn"><i class="fa fa-cog" aria-hidden="true"></i></span>
+					</div>
+					<hr>
+				</div>
+			</div>
+		</ng-container>
+		<ng-container *ngSwitchDefault>
+			<div class="set-part">
+				<h3 style="padding-top: 14px;">Detail setting</h3>
+				<h5>{{ cq?.name }}</h5>
+			</div>
+			<div class="set-box">
+				<ng-container [ngTemplateOutlet]="Normol_Form"></ng-container>
+			</div>
+			<ng-container *ngIf="cq.quesTypeId !== quesType.Number">
+				<div class="set-part">
+					<h3>Option setting</h3>
+				</div>
+				<div class="set-box">
+					<ng-container [ngTemplateOutlet]="Option_Form"></ng-container>
+				</div>
+			</ng-container>
+		</ng-container>
+	</ng-container>
+</div>
+
+<ng-template #Normol_Form>
+	<div class="gs-form-item">
+		<label>Required</label>
+		<nz-switch (ngModelChange)="changeSwtich($event, 'required')" [(ngModel)]="nObj.required"></nz-switch>
+	</div>
+	<div class="gs-form-item">
+		<label>Display Seq No.</label>
+		<nz-switch [(ngModel)]="nObj.showSeq" (ngModelChange)="changeSwtich($event, 'showSeq')"></nz-switch>
+	</div>
+	<div class="gs-form-item">
+		<label>Seq No. setting</label>
+		<input type="text" style="width: 55px; text-align: right;" class="gs-input" autocomplete="off" maxlength="10"
+			[(ngModel)]="nObj.seqNo" (blur)="inputChange(nObj.seqNo, 'seqNo')">
+	</div>
+	<div class="gs-form-item">
+		<label>Identify<i class="fa fa-question-circle" nz-tooltip [nzTooltipTitle]="idenTooltip" aria-hidden="true"></i></label>
+		<input type="text" style="width: 130px; font-size: 12px;" class="gs-input" autocomplete="off" maxlength="30"
+			[(ngModel)]="nObj.identify" (blur)="inputChange(nObj.identify, 'identify')">
+	</div>
+	<hr>
+	<div class="gs-form-item">
+		<label>Tooltip</label>
+		<nz-switch [(ngModel)]="nObj.needTooltip"></nz-switch>
+		<!-- (ngModelChange)="changeSwtich($event, 'needTooltip')" -->
+	</div>
+	<div class="gs-form-item" *ngIf="nObj.needTooltip">
+		<label>Tooltip content</label>
+		<span class="gs-txt-btn"><i class="fa fa-cog" aria-hidden="true"></i></span>
+	</div>
+	<div class="gs-form-item">
+		<label>Layout<i class="fa fa-question-circle" nz-tooltip [nzTooltipTitle]="EffectInPreview" aria-hidden="true"></i></label>
+		<nz-radio-group [(ngModel)]="nObj.layout" (ngModelChange)="changeRadio($event, 'layout')">
+			<label nz-radio-button [nzValue]="1">col</label>
+			<label nz-radio-button [nzValue]="2">2cols</label>
+			<label nz-radio-button [nzValue]="3">3cols</label>
+		</nz-radio-group>
+	</div>
+	<hr>
+	<div class="gs-form-item">
+		<label>Logics<i class="fa fa-question-circle" nz-tooltip [nzTooltipTitle]="LogicTooltip" aria-hidden="true"></i></label>
+		<span class="gs-txt-btn"><i class="fa fa-cog" aria-hidden="true"></i></span>
+	</div>
+	<div class="gs-form-item">
+		<label>Answers and scores</label>
+		<!-- <label>Answers and scores<i class="fa fa-question-circle" aria-hidden="true"></i></label> -->
+		<span class="gs-txt-btn dis"><i class="fa fa-cog" nz-tooltip nzTooltipTitle="Not enabled yet" aria-hidden="true"></i></span>
+	</div>
+</ng-template>
+
+<ng-template #Option_Form>
+	<div *ngIf="cq.quesTypeId === quesType.Radio || cq.quesTypeId === quesType.CheckBox" class="gs-form-item">
+		<label>Option layout</label>
+		<nz-radio-group [(ngModel)]="opObj.optionLayout" (ngModelChange)="changeRadio($event, 'optionLayout', 'optSet')">
+			<label nz-radio-button [nzValue]="1">col</label>
+			<label nz-radio-button [nzValue]="2">2cols</label>
+			<label nz-radio-button [nzValue]="3">3cols</label>
+		</nz-radio-group>
+	</div>
+	<div *ngIf="cq.quesTypeId === quesType.DropdownSelect || cq.quesTypeId === quesType.DropdownMultipleSelect" class="gs-form-item">
+		<label>Enable search</label>
+		<nz-switch [(ngModel)]="opObj.selectEnableSearch" (ngModelChange)="changeSwtich($event, 'selectEnableSearch', 'optSet')"></nz-switch>
+	</div>
+	<div *ngIf="cq.quesTypeId === quesType.DropdownMultipleSelect" class="gs-form-item">
+		<label>Enable select all</label>
+		<nz-switch [(ngModel)]="opObj.canCheckAll" (ngModelChange)="changeSwtich($event, 'canCheckAll', 'optSet')"></nz-switch>
+	</div>
+	<!-- select range -->
+	<ng-container *ngIf="cq.quesTypeId === quesType.CheckBox || cq.quesTypeId === quesType.DropdownMultipleSelect">
+		<div class="gs-form-item">
+			<label>Select range</label>
+		</div>
+		<div class="gs-form-item select-range">
+			<label>min</label>
+			<nz-select nzSize="small" [nzShowArrow]="false" [nzAllowClear]="true" nzPlaceHolder="N/A"
+				[(ngModel)]="opObj.selectMin" (ngModelChange)="changeSelect($event, 'selectMin')">
+				<nz-option *ngFor="let c of cq.options; let i = index" [nzDisabled]="opObj.selectMax !== null && opObj.selectMax < i + 1" [nzValue]="i + 1" [nzLabel]="i + 1"></nz-option>
+			</nz-select>
+			<label>max</label>
+			<nz-select nzSize="small" [nzShowArrow]="false" [nzAllowClear]="true" nzPlaceHolder="N/A"
+				[(ngModel)]="opObj.selectMax" (ngModelChange)="changeSelect($event, 'selectMax')">
+				<nz-option *ngFor="let c of cq.options; let i = index" [nzDisabled]="opObj.selectMin > i + 1" [nzValue]="i + 1" [nzLabel]="i + 1"></nz-option>
+			</nz-select>
+		</div>
+	</ng-container>
+	<!-- select range end -->
+	<!-- text option setting -->
+	<ng-container *ngIf="cq.quesTypeId === quesType.Text">
+		<div class="gs-form-item">
+			<label>Format</label>
+			<nz-select [(ngModel)]="opObj.textFormat" (ngModelChange)="changeSelect($event, 'textFormat')"
+				nzSize="small" style="width: 100px;" [nzAllowClear]="true" nzPlaceHolder="N/A">
+				<nz-option *ngFor="let o of tfList" [nzValue]="o.key" [nzLabel]="o.value"></nz-option>
+			</nz-select>
+		</div>
+		<div class="gs-form-item">
+			<label>Minimum</label>
+			<nz-input-number [(ngModel)]="opObj.minLength" (ngModelChange)="changeNumber($event, 'minLength')"
+				style="width: 65px;" [nzMin]="0" nzPrecision="0" [nzSize]="'small'" [nzStep]="1"></nz-input-number>
+		</div>
+		<div class="gs-form-item">
+			<label>Maximum</label>
+			<nz-input-number [(ngModel)]="opObj.maxLength" (ngModelChange)="changeNumber($event, 'maxLength')"
+				style="width: 65px;" [nzMin]="0" [nzMax]="2000" nzPrecision="0" [nzSize]="'small'" [nzStep]="1"></nz-input-number>
+		</div>
+		<div class="gs-form-item">
+			<label>Default value</label>
+			<input [(ngModel)]="opObj.defaultValue" (blur)="inputChange(opObj.defaultValue, 'defaultValue', 'optSet')"
+				type="text" style="width: 100px; font-size: 12px;" class="gs-input" autocomplete="off">
+		</div>
+	</ng-container>
+	<!-- text option setting end -->
+	<ng-container *ngIf="cq.quesTypeId === quesType.TextArea">
+		<div class="gs-form-item">
+			<label>Maximum</label>
+			<nz-input-number [(ngModel)]="opObj.maxLength" (ngModelChange)="changeNumber($event, 'maxLength')"
+				style="width: 65px;" [nzMax]="8000" nzPrecision="0" [nzSize]="'small'" [nzStep]="1"></nz-input-number>
+		</div>
+	</ng-container>
+	<ng-container *ngIf="cq.quesTypeId === quesType.TypeAhead">
+		<div class="gs-form-item">
+			<label>Server url<i class="fa fa-question-circle" nz-tooltip [nzTooltipTitle]="dataSourceUrl" aria-hidden="true"></i></label>
+			<input [(ngModel)]="opObj.serverUrl" (blur)="inputChange(opObj.serverUrl, 'serverUrl', 'optSet')"
+				type="text" style="width: 130px; font-size: 12px;" class="gs-input" autocomplete="off">
+		</div>
+		<div class="gs-form-item">
+			<label>Advance setting</label>
+			<span class="gs-txt-btn"><i class="fa fa-cog" aria-hidden="true"></i></span>
+		</div>
+	</ng-container>
+	<!-- Date setting -->
+	<ng-container *ngIf="cq.quesTypeId === quesType.Date || cq.quesTypeId === quesType.DateRange">
+		<div class="gs-form-item">
+			<label>Enable select time</label>
+			<nz-switch [(ngModel)]="opObj.enableSelectTime" (ngModelChange)="changeSwtich($event, 'enableSelectTime', 'optSet')"></nz-switch>
+		</div>
+		<div class="gs-form-item">
+			<label>Format type</label>
+			<nz-select [(ngModel)]="opObj.dateFormatType" (ngModelChange)="changeSelect($event, 'dateFormatType', 'optSet')"
+				nzSize="small" style="width: 130px;" [nzAllowClear]="true">
+				<nz-option *ngFor="let o of dfList" [nzValue]="o.key" [nzLabel]="o.value"></nz-option>
+			</nz-select>
+		</div>
+	</ng-container>
+	<!-- Date setting end -->
+	<!-- scale option setting -->
+	<ng-container *ngIf="cq.quesTypeId === quesType.ScaleQuestion">
+		<div class="gs-form-item">
+			<label>Extreme label</label>
+			<nz-select [(ngModel)]="opObj.scaleExtreme" (ngModelChange)="changeSelect($event, 'scaleExtreme')" nzSize="small" style="width: 120px;">
+				<nz-option *ngFor="let o of seList" [nzValue]="o.key" [nzLabel]="o.value"></nz-option>
+			</nz-select>
+		</div>
+		<div class="gs-form-item">
+			<label>level</label>
+			<nz-select [(ngModel)]="opObj.scaleLevel" (ngModelChange)="changeSelect($event, 'scaleLevel')" nzSize="small" style="width: 100px;">
+				<nz-option [nzValue]="2" nzLabel="level 2"></nz-option>
+				<nz-option [nzValue]="3" nzLabel="level 3"></nz-option>
+				<nz-option [nzValue]="4" nzLabel="level 4"></nz-option>
+				<nz-option [nzValue]="5" nzLabel="level 5"></nz-option>
+				<nz-option [nzValue]="6" nzLabel="level 6"></nz-option>
+				<nz-option [nzValue]="7" nzLabel="level 7"></nz-option>
+				<nz-option [nzValue]="8" nzLabel="level 8"></nz-option>
+				<nz-option [nzValue]="9" nzLabel="level 9"></nz-option>
+				<nz-option [nzValue]="10" nzLabel="level 10"></nz-option>
+			</nz-select>
+		</div>
+		<div class="gs-form-item">
+			<label>initial level</label>
+			<nz-input-number style="width: 60px;" [(ngModel)]="opObj.startLevelValue" (ngModelChange)="changeNumber($event, 'startLevelValue')" [nzSize]="'small'" [nzStep]="1"></nz-input-number>
+		</div>
+	</ng-container>
+	<!-- scale option setting end -->
+	<!-- Score setting -->
+	<ng-container *ngIf="cq.quesTypeId === quesType.Score">
+		<div class="gs-form-item">
+			<label>Lowest score</label>
+			<nz-select [(ngModel)]="opObj.lowScore" nzSize="small" style="width: 80px;">
+				<nz-option [nzValue]="1" nzLabel="1"></nz-option>
+				<nz-option [nzValue]="2" nzLabel="2"></nz-option>
+				<nz-option [nzValue]="3" nzLabel="3"></nz-option>
+				<nz-option [nzValue]="4" nzLabel="4"></nz-option>
+				<nz-option [nzValue]="5" nzLabel="5"></nz-option>
+			</nz-select>
+		</div>
+		<div class="gs-form-item">
+			<label>Highest score</label>
+			<nz-select [(ngModel)]="opObj.highScore" nzSize="small" style="width: 80px;">
+				<nz-option [nzValue]="1" nzLabel="1"></nz-option>
+				<nz-option [nzValue]="2" nzLabel="2"></nz-option>
+				<nz-option [nzValue]="3" nzLabel="3"></nz-option>
+				<nz-option [nzValue]="4" nzLabel="4"></nz-option>
+				<nz-option [nzValue]="5" nzLabel="5"></nz-option>
+			</nz-select>
+		</div>
+		<div class="gs-form-item">
+			<label style="color: rgb(24, 24, 24); font-size: 14px;">Tooltip text</label>
+		</div>
+		<div class="gs-form-item">
+			<label>Left text</label>
+			<input type="text" [(ngModel)]="opObj.lText" style="width: 130px; font-size: 12px;" class="gs-input" autocomplete="off">
+		</div>
+		<div class="gs-form-item">
+			<label>Middle text</label>
+			<input type="text" [(ngModel)]="opObj.cText" style="width: 130px; font-size: 12px;" class="gs-input" autocomplete="off">
+		</div>
+		<div class="gs-form-item">
+			<label>Right text</label>
+			<input type="text" [(ngModel)]="opObj.rText" style="width: 130px; font-size: 12px;" class="gs-input" autocomplete="off">
+		</div>
+	</ng-container>
+	<!-- Score setting end -->
+	<!-- Upload setting -->
+	<ng-container *ngIf="cq.quesTypeId === quesType.Upload">
+		<div class="gs-form-item">
+			<label>Maximum uploaded files</label>
+			<nz-select [(ngModel)]="opObj.uploadAmount" (ngModelChange)="changeFileOption($event, 'uploadAmount')" nzSize="small" style="width: 60px;">
+				<nz-option [nzValue]="1" nzLabel="1"></nz-option>
+				<nz-option [nzValue]="2" nzLabel="2"></nz-option>
+				<nz-option [nzValue]="3" nzLabel="3"></nz-option>
+				<nz-option [nzValue]="4" nzLabel="4"></nz-option>
+				<nz-option [nzValue]="5" nzLabel="5"></nz-option>
+				<nz-option [nzValue]="6" nzLabel="6"></nz-option>
+				<nz-option [nzValue]="7" nzLabel="7"></nz-option>
+				<nz-option [nzValue]="8" nzLabel="8"></nz-option>
+				<nz-option [nzValue]="9" nzLabel="9"></nz-option>
+				<nz-option [nzValue]="10" nzLabel="10"></nz-option>
+			</nz-select>
+		</div>
+		<div class="gs-form-item">
+			<label>File size limit</label>
+			<nz-input-number [(ngModel)]="opObj.uploadSize" (ngModelChange)="changeFileOption($event, 'uploadSize')" style="width: 60px;"
+				[nzSize]="'small'" [nzMax]="30" [nzMin]="0" nzPrecision="0" [nzStep]="1"></nz-input-number>
+		</div>
+		<div class="gs-form-item">
+			<label>File format setting</label>
+			<span class="gs-txt-btn"><i class="fa fa-cog" aria-hidden="true"></i></span>
+		</div>
+	</ng-container>
+	<!-- Upload setting end -->
+	<!-- Img Upload setting -->
+	<ng-container *ngIf="cq.quesTypeId === quesType.ImgUpload">
+		<div class="gs-form-item">
+			<label>Maximum uploaded image</label>
+			<nz-select [(ngModel)]="opObj.uploadAmount" nzSize="small" style="width: 60px;">
+				<nz-option [nzValue]="1" nzLabel="1"></nz-option>
+				<nz-option [nzValue]="2" nzLabel="2"></nz-option>
+				<nz-option [nzValue]="3" nzLabel="3"></nz-option>
+				<nz-option [nzValue]="4" nzLabel="4"></nz-option>
+				<nz-option [nzValue]="5" nzLabel="5"></nz-option>
+				<nz-option [nzValue]="6" nzLabel="6"></nz-option>
+				<nz-option [nzValue]="7" nzLabel="7"></nz-option>
+				<nz-option [nzValue]="8" nzLabel="8"></nz-option>
+				<nz-option [nzValue]="9" nzLabel="9"></nz-option>
+				<nz-option [nzValue]="10" nzLabel="10"></nz-option>
+			</nz-select>
+		</div>
+		<div class="gs-form-item">
+			<label>File format setting</label>
+			<span class="gs-txt-btn"><i class="fa fa-cog" aria-hidden="true"></i></span>
+		</div>
+	</ng-container>
+	<!-- Img Upload setting end -->
+	<hr>
+</ng-template>
+
+<ng-template #noSelect>
+	<div style="padding: 18px;">Please select one question</div>
+</ng-template>
+<ng-template #splitLine>
+	<span>Sprit line</span>
+</ng-template>

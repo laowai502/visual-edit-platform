@@ -1,0 +1,21 @@
+.main-container {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    .main-body {
+        display: block;
+        position: relative;
+        height: calc(100vh);
+        padding-top: 0px;
+        background-color: rgba(236, 236, 236, .5);
+        .main-content {
+            height: auto;
+            padding-top: 112px;
+            // ::ng-deep .main-pages-content {
+            //     width: 100%;
+            //     background-color: #FFFFFF;
+            //     min-height: calc(100vh - 64px - 38px);
+            // }
+        }
+    }
+}

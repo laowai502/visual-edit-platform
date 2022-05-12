@@ -1,0 +1,54 @@
+<div class="content-zone">
+	<ng-container *ngIf="item?.content; else noContent">
+		<ng-container  *ngTemplateOutlet="contentTpl; context: { $implicit: item.content, level: 0, ci: '0' }"></ng-container>
+		<ng-template #contentTpl let-content let-level="level" let-ci="ci">
+			<div class="drop-zone" (drop)="dropZoneEvent($event, content)" (dragover)="$event.preventDefault()">
+				<h3>Drop zone, you can drop the contents here</h3>
+			</div>
+			<div class="add-panel-btn">
+				<button nz-button nzType="dashed" nzShape="round" style="width: 180px; border-color: #bbb;" (click)="addHierarchy(content, level, ci)">Add Panel</button>
+			</div>
+			<div class="content-wrapper">
+				<ng-container *ngFor="let cont of content">
+					<div *ngIf="!cont.children" class="content-item ib ques-appear-animation" [style.width]="98/cont.layout + '%'" [id]="cont.questionId">
+						<i class="fa fa-trash-o" style="font-size: 20px;" (click)="removeContent(cont, content)"></i>
+						<iqnr-base-question [ques]="cont" [type]="'READ'"></iqnr-base-question>
+						<!-- Switch question type -->
+						<ng-container [ngSwitch]="cont.quesTypeId">
+							<edit-select-type-ques *ngSwitchCase="QuesType.Radio" [ques]="cont" [type]="'READ'"></edit-select-type-ques>
+							<edit-select-type-ques *ngSwitchCase="QuesType.CheckBox" [ques]="cont" [type]="'READ'"></edit-select-type-ques>
+							<edit-select-type-ques *ngSwitchCase="QuesType.DropdownSelect" [ques]="cont" [type]="'READ'"></edit-select-type-ques>
+							<edit-select-type-ques *ngSwitchCase="QuesType.DropdownMultipleSelect" [ques]="cont" [type]="'READ'"></edit-select-type-ques>
+							<edit-scale-ques *ngSwitchCase="QuesType.Score" [ques]="cont"></edit-scale-ques>
+							<edit-scale-ques *ngSwitchCase="QuesType.ScaleQuestion" [ques]="cont"></edit-scale-ques>
+							<edit-text-question *ngSwitchCase="QuesType.Text" [ques]="cont"></edit-text-question>
+							<edit-text-question *ngSwitchCase="QuesType.TextArea" [ques]="cont"></edit-text-question>
+							<edit-text-question *ngSwitchCase="QuesType.Number" [ques]="cont"></edit-text-question>
+							<edit-text-question *ngSwitchCase="QuesType.TypeAhead" [ques]="cont"></edit-text-question>
+							<edit-text-question *ngSwitchCase="QuesType.Date" [ques]="cont"></edit-text-question>
+							<edit-text-question *ngSwitchCase="QuesType.DateRange" [ques]="cont"></edit-text-question>
+							<iqnr-edit-file *ngSwitchCase="QuesType.Upload" [ques]="cont" [type]="'READ'"></iqnr-edit-file>
+							<iqnr-edit-file *ngSwitchCase="QuesType.ImgUpload" [ques]="cont" [type]="'READ'"></iqnr-edit-file>
+						</ng-container>
+					</div>
+					<nz-collapse nzGhost *ngIf="cont.children" [style.padding-left.px]="36 * (level > 1 ? (level - 1) : level)">
+						<nz-collapse-panel [nzHeader]="panelHeader" [(nzActive)]="cont.active">
+							<ng-template #panelHeader>
+								<i class="fa fa-trash-o" style="font-size: 20px;" (click)="removePanel(cont, content);"></i>
+								<div [id]="cont.cIndex" class="edit-panel-title ib" contenteditable="true" [innerHTML]="cont.name | Realhtml"
+									(blur)="savePanelTitle(cont)" (click)="$event.stopPropagation();"></div>
+							</ng-template>
+							<ng-container *ngTemplateOutlet="contentTpl; context: { $implicit: cont.children, level: cont.level + 1, ci: cont.cIndex }"></ng-container>
+						</nz-collapse-panel>
+					</nz-collapse>
+				</ng-container>
+			</div>
+		</ng-template>
+	</ng-container>
+</div>
+
+<ng-template #noContent>
+	<p class="tip-title" style="padding: 20px;">Your main contents here, please create or select a menu item first.</p>
+</ng-template>
+
+

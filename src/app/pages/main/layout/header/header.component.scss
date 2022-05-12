@@ -1,0 +1,101 @@
+header {
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    display: block;
+    position: fixed;
+    color: #707070;
+    background-color: #FFF;
+    height: 64px;
+    z-index: 10;
+    padding: 0 40px 0 20px;
+    h3 {
+        margin: 0;
+        line-height: 64px;
+        font-size: 18px;
+    }
+    &>a {
+        display: inline-block;
+        margin: 6px 10px;
+        img {
+            height: 52px;
+        }
+    }
+
+    .head-list {
+        margin-left: 10px;
+        margin-bottom: 0;
+        line-height: 64px;
+        font-size: 14px;
+        vertical-align: top;
+        li+li {
+            margin-left: 24px;
+            a {
+                color: #707070;
+            }
+        }
+        li.active {
+            position: relative;
+            a {
+                color: #2672ff;
+            }
+            &::after {
+                content: "";
+                width: 100%;
+                bottom: 0;
+                left: 0;
+                position: absolute;
+                border-bottom: 2px solid #2672ff;
+            }
+        }
+    }
+    .head-user {
+        line-height: 64px;
+        float: right;
+        .user {
+            display: inline-block;
+            vertical-align: middle;
+            &>img {
+                width: 24px;
+                display: block;
+                border-radius: 50%;
+            }
+        }
+        .user-list {
+            li {
+                width: 180px;
+                font-size: 14px;
+                padding: 0 20px 0 25px;
+                line-height: 38px;
+                color: #707070;
+                vertical-align: middle;
+                &>i.fa {
+                    margin-right: 12px;
+                    vertical-align: initial;
+                }
+                &:hover {
+                    background-color: #f5f6fa;
+                    color: #2672ff;
+                }
+            }
+        }
+        ::ng-deep {
+            .user-popover {
+                border-radius: 0px;
+                margin-top: 15px;
+                .arrow {
+                    right: 2px;
+                }
+                .popover-header {
+                    padding: 10px;
+                    margin: 0 10px;
+                    background-color: #FFF;
+                    border-bottom: 1px #bfbfbf solid;
+                }
+                .popover-body {
+                    padding: 0;
+                }
+            }
+        }
+    }
+}

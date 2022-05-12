@@ -1,0 +1,104 @@
+@import '../../../../../../theme/base.scss';
+@import '../setting.component.scss';
+
+:host {
+	width: 100%;
+	position: absolute;
+
+	.ques-setting-detail {
+		overflow-x: hidden;
+		padding: 14px 0px 16px 18px;
+		height: calc(100vh - 110px);
+
+		@include inner-scroll-style;
+
+		.fa-question-circle {
+			color: #bababa;
+			font-size: 16px;
+			margin-left: 4px;
+			cursor: pointer;
+			vertical-align: text-bottom;
+		}
+
+		&>.title {
+			word-break: break-all;
+			line-height: 1.5;
+			font-size: 13px;
+			padding-right: 16px;
+			color: #a7a7a7;
+			@include  multi-line-ellipsis(3);
+		}
+
+		.set-part {
+			margin-top: 12px;
+			&>h3 {
+				padding: 0;
+				color: #202020;
+				font-size: 15px;
+				line-height: 1;
+				font-weight: 500;
+			}
+			&>h5 {
+				line-height: 1;
+				font-size: 12px;
+				color: #a5a5a5;
+				font-weight: 500;
+				padding: 6px 0 0 0px;
+			}
+		}
+
+		.set-box {
+			padding: 6px 0;
+			border-top: 1px solid #cfcfcf;
+			margin-top: 12px;
+			margin-right: 12px;
+			::ng-deep {
+				.gs-form-item {
+					display: flex;
+					position: relative;
+					align-items: center;
+					justify-content: space-between;
+					padding: 6px 4px 6px 0px;
+					@include gs-form-item-style;
+					&>label {
+						font-size: 13px;
+						color: #5c5c5c;
+					}
+					.gs-txt-btn.dis {
+						color: #b3b3b3;
+						cursor: default;
+					}
+					.gs-txt-btn .fa-cog {
+						font-size: 18px;
+					}
+					nz-select {
+						font-size: 12px;
+						nz-select-arrow, nz-select-clear {
+							right: 6px;
+						}
+					}
+					nz-input-number {
+						font-size: 12px;
+						width: 100px;
+					}
+				}
+				.gs-form-item.select-range {
+					nz-select {
+						width: 50px;
+						margin-left: -30px;
+					}
+				}
+			}
+			hr {
+				border-color: #cfcfcf;
+				margin-top: 8px;
+				border-width: 1px;
+				border-top-width: 0px;
+			}
+		}
+	}
+}
+
+.q-set-select-option {
+
+}

@@ -1,0 +1,198 @@
+@import '../../../../../theme/base.scss';
+
+:host .setting-wrap {
+	display: none;
+    overflow: hidden;
+    position: fixed;
+    right: -260px;
+    top: 66px;
+    bottom: 0;
+    border-left: 1px solid #dde5ed;
+    width: 260px;
+    background-color: #fff;
+    line-height: 1.38;
+	&.show {
+		opacity: 1;
+		right: 0px;
+		display: block;
+	}
+
+	.fa-question-circle {
+		color: #bababa;
+		font-size: 16px;
+		margin-left: 4px;
+		cursor: pointer;
+		vertical-align: text-bottom;
+	}
+
+	.gs-form-item {
+		display: flex;
+		align-items: center;
+		position: relative;
+		border-bottom: 1px solid #dde5ed;
+		justify-content: space-between;
+		padding: 12px 16px 12px 18px;
+
+		nz-select {
+			width: 90px;
+			font-size: 12px;
+		}
+	}
+}
+
+@mixin gs-form-item-style {
+	nz-switch {
+		&>button.ant-switch {
+			min-width: 32px;
+			height: 16px;
+			.ant-switch-handle {
+				width: 12px;
+				height: 12px;
+			}
+			&.ant-switch-checked .ant-switch-handle {
+				left: calc(100% - 14px);
+			}
+		}
+	}
+	nz-radio-group {
+		label.ant-radio-button-wrapper {
+			height: 24px;
+			padding: 0 6px;
+			font-size: 12px;
+			line-height: 22px;
+			user-select: none;
+		}
+	}
+	.gs-input {
+		border-radius: 2px;
+		background-color: #fff;
+		border: 1px solid #d8d8d8;
+		color: #484848;
+		display: inline-block;
+		height: 24px;
+		line-height: 24px;
+		padding: 2px 4px;
+		width: 130px;
+		&:hover, &:focus {
+			border-color: #2672ff;
+			box-shadow: 0 2px 4px 0 rgb(0 0 0 / 10%);
+		}
+	}
+	iqnr-suffix {
+		right: 17px;
+		font-size: 12px;
+		line-height: 22px;
+		position: absolute;
+	}
+	.gs-txt-btn {
+		padding: 0 8px;
+		cursor: pointer;
+		color: #2672ff;
+	}
+	nz-slider {
+		width: 100px;
+		.ant-slider-track {
+			background-color: #2672ff;
+		}
+		.ant-slider-handle {
+			border-color: #2672ff;
+		}
+	}
+}
+
+@mixin setting-ant-collapse {
+	.ant-collapse {
+		.ant-collapse-item {
+			// border-bottom: 1px solid #dde5ed;
+			&:first-child {
+				border-top: 1px solid #dde5ed;
+			}
+		}
+
+		.ant-collapse-item {
+			&.ant-collapse-item-active {
+				border-bottom: 1px solid #dde5ed;
+			}
+			&:hover, &.ant-collapse-item-active {
+				.ant-collapse-header {
+					color: #2672ff;
+				}
+			}
+			.ant-collapse-header {
+				// font-size: 13px;
+				padding: 12px 16px 12px 18px;
+				border-bottom: 1px solid #dde5ed;
+				.ant-collapse-arrow {
+					// right: 24px;
+					& > svg {
+						transform: rotate(-90deg);
+					}
+				}
+			}
+			.ant-collapse-content {
+				background-color: #fafafa;
+				font-size: 13px;
+				color: #707070;
+				.ant-collapse-content-box {
+					padding: 0;
+				}
+				.ant-collapse-content-box {
+					.gs-form-item {
+						border-bottom: 1px solid #dde5ed;
+						position: relative;
+						margin-left: 18px;
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						padding: 12px 16px 12px 0;
+						&:last-child {
+							border-bottom: none;
+						}
+						@include gs-form-item-style;
+					}
+				}
+			}
+		}
+	}
+}
+
+@mixin setting-ant-tabs {
+	.ant-tabs-nav {
+		color: #707070;
+		background-color: #f7f8fa;
+		border-bottom-width: 0px;
+		.ant-tabs-nav-list {
+			width: 100%;
+			.ant-tabs-tab {
+				width: 60%;
+				margin: 0;
+				text-align: center;
+				padding: 8px 0 10px;
+				user-select: none;
+				&:first-child {
+					width: 40%;
+				}
+				.ant-tabs-tab-btn {
+					width: 100%;
+					text-align: center;
+				}
+			}
+			.ant-tabs-tab.ant-tabs-tab-active {
+				background-color: #FFF;
+			}
+		}
+	}
+	.ant-tabs-content {
+		overflow-x: hidden;
+		height: calc(100vh - 110px);
+		@include inner-scroll-style;
+
+		@include setting-ant-collapse;
+	}
+}
+
+:host ::ng-deep {
+	.setting-wrap {
+		@include setting-ant-tabs;
+	}
+}

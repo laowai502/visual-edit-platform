@@ -1,0 +1,40 @@
+/* all directive dynamic classes are here */
+.is-dragging {
+	border: dashed 1px #1438b7;
+	box-shadow: 0 0 24px rgba(0, 0, 0, 0.1);
+	opacity: 0.8;
+}
+
+.hover-style-1 {
+	overflow: hidden;
+
+	&:after {
+		position: absolute;
+		top: 0;
+		font-size: 18px;
+		text-decoration: underline;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		transition: all 0.5s ease;
+		background-color: rgba(0, 0, 0, 0.35);
+		content: "View Effect";
+		text-align: center;
+		letter-spacing: 1px;
+		color: #FFF;
+		padding-top: 50%;
+		width: 100%;
+		// opacity: 0.35;
+		z-index: 1;
+	}
+
+	&:after {
+		transform: skew(0deg) translateY(-100%);
+	}
+
+	&:hover {
+		&:after {
+			transform: skew(0) translateY(0);
+		}
+	}
+}

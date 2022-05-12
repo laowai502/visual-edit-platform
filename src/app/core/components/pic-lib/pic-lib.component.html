@@ -1,0 +1,59 @@
+<nz-modal [(nzVisible)]="isVisible" nzWrapClassName="pic-lib-modal" nzWidth="840px" [nzAutofocus]="null" [nzMaskClosable]="false"
+	[nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()">
+	<ng-template #modalTitle>Add images
+		<nz-steps [nzCurrent]="step">
+			<nz-step nzTitle="1. Select from material library"></nz-step>
+			<nz-step nzTitle="2. Picture cutting"></nz-step>
+		</nz-steps>
+	</ng-template>
+	<ng-template #modalContent>
+		<div *ngIf="step === 0" class="pic-lib-wrapper">
+			<div class="pic-lib-nav">
+				<ul nz-menu nzMode="inline">
+					<li *ngFor="let g of group" [nzSelected]="g.key === ''" nz-menu-item (click)="clickNav(g.key)">
+						{{ g.title }}<span class="ml8" *ngIf="g.number > 0">({{g.number}})</span>
+					</li>
+					<li class="ant-menu-item" style="padding-left: 16px;">
+						<span nz-popover [(nzPopoverVisible)]="visible" nzPopoverTrigger="click"
+							 [nzPopoverContent]="contentTemplate" class="add-group">+ New Gronup</span>
+						<ng-template #contentTemplate>
+							<input nz-input placeholder="18 characters limit" [(ngModel)]="groupName" />
+							<div class="add-group-btns">
+								<button nz-button nzType="default" (click)="cancelGroup()">Cancel</button>
+								<button nz-button nzType="primary" (click)="saveGroup()">Save</button>
+							</div>
+							<div style="clear: both;"></div>
+						</ng-template>
+					</li>
+				</ul>
+			</div>
+			<div class="pic-lib-content">
+				<div class="upload-btn-wrapper" style="float: right;">
+					<i class="fa fa-question-circle cur" aria-hidden="true"></i>
+					<input #fileForm type="file" accept="image/jpeg, image/jpg, image/png, image/gif" multiple="multiple" class="input-file" />
+					<button nz-button nzType="primary" style="padding: 0 16px" nzGhost (click)="clickInputFile()">Upload</button>
+				</div>
+				<div class="clear"></div>
+				<div class="upload-pic-wrapper">
+					<div class="pic-item" [class.selected]="img.checked" *ngFor="let img of showList" (click)="clickItem(img)">
+						<div class="pic-wrapper">
+							<img *ngIf="img.progress >= 100" src="{{ img.src }}" alt="">
+							<div *ngIf="img.progress < 100">
+								<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+							</div>
+						</div>
+						<nz-progress *ngIf="img.progress <= 100" [nzPercent]="img.progress"></nz-progress>
+						<div *ngIf="img.progress > 100" class="pic-name">{{ img.name }}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div *ngIf="step === 1" class="pic-cut-wrapper"></div>
+	</ng-template>
+	<ng-template #modalFooter>
+		<span></span>
+		<button *ngIf="step === 0" nz-button nzType="default" [disabled]="!nextBtnEnable" (click)="next()">Next</button>
+		<button *ngIf="step !== 0" nz-button nzType="default" (click)="preview()">Preview</button>
+		<button *ngIf="step !== 0" nz-button nzType="primary" (click)="handleCancel()">Save</button>
+	</ng-template>
+</nz-modal>

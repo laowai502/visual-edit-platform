@@ -1,0 +1,9 @@
+<div class="nav-wrap">
+	<ul class="nav-list">
+		<ng-container *ngFor="let o of navList">
+			<li *ngIf="o.display" class="nav-item cur" [class.active]="o.active" (click)="togglePage(o)">
+				<i class="{{ 'fa ' + o.icon }}"></i>{{ o.name }}
+			</li>
+		</ng-container>
+	</ul>
+</div>

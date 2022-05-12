@@ -1,0 +1,66 @@
+<div class="edit-area-wrap">
+	<!-- title -->
+	<div #title_area class="title-wrap" *ngIf="!proInfo || proInfo?.showTitle || proInfo?.showWel">
+		<div *ngIf="!proInfo || proInfo?.showTitle" class="title-container" contenteditable="true" (blur)="saveTitle()" [innerHTML]="title | Realhtml"></div>
+		<div class="mt8" *ngIf="proInfo?.showWel">
+			<div #wel_z class="wel-container" contenteditable="true" [innerHTML]="wel | Realhtml"></div>
+		</div>
+	</div>
+	<!-- question box -->
+	<div class="ques-wrap">
+		<div *ngIf="showTip" #tipArea class="tip-container" (drop)="dropQues($event)" (dragover)="$event.preventDefault()"
+			(dragenter)="dragEnter($event, 'tip')" (dragleave)="dragLeave($event, 'tip')">
+			<div class="tip">
+				<p><i class="fa fa-mouse-pointer"></i>Double click on a content type</p>or
+				<p><i class="fa fa-arrows"></i>Drag the content type into this area</p>
+			</div>
+			<ng-container *ngIf="bottomDragStyle" [ngTemplateOutlet]="dragEndStyle"></ng-container>
+		</div>
+		<div *ngIf="!showTip" class="ques-container">
+			<ng-container *ngFor="let q of editQuesList; let i=index">
+				<ng-container *ngIf="q.topDragStyle" [ngTemplateOutlet]="dragTopStyle"></ng-container>
+				<div #quesRef [tabindex]="i" [id]="q.questionId"
+					eqClickBubbling [bubbingData]="q" drag-mouse-move [bindData]="q" (DragMoving)="dragMove($event, q)"
+					class="edit-ques ques-appear-animation" [class.mt0]="q.topDragStyle" [class.mb0]="q.bottomDragStyle" [class.focus]="q.focus"
+					draggable="false" (drop)="dropQues($event, q)" (dragover)="$event.preventDefault()" (dragenter)="dragEnter($event, 'ques')" (dragleave)="dragLeave($event, q)"
+					(focus)="focusQues(q)" (mouseenter)="q.mouseenter=true" (mouseleave)="q.mouseenter=false">
+					<!-- action-bar -->
+					<ng-container *ngIf="q.focus || q.mouseenter">
+						<ques-action-bar [question]="q"></ques-action-bar>
+					</ng-container>
+					<!-- base area -->
+					<iqnr-base-question [ques]="q"></iqnr-base-question>
+					<!-- Switch question type -->
+					<ng-container [ngSwitch]="q.quesTypeId">
+						<edit-select-type-ques *ngSwitchCase="QuesType.Radio" [ques]="q"></edit-select-type-ques>
+						<edit-select-type-ques *ngSwitchCase="QuesType.CheckBox" [ques]="q"></edit-select-type-ques>
+						<edit-select-type-ques *ngSwitchCase="QuesType.DropdownSelect" [ques]="q"></edit-select-type-ques>
+						<edit-select-type-ques *ngSwitchCase="QuesType.DropdownMultipleSelect" [ques]="q"></edit-select-type-ques>
+						<edit-scale-ques *ngSwitchCase="QuesType.ScaleQuestion" [ques]="q"></edit-scale-ques>
+						<edit-text-question *ngSwitchCase="QuesType.Text" [ques]="q"></edit-text-question>
+						<edit-text-question *ngSwitchCase="QuesType.TextArea" [ques]="q"></edit-text-question>
+						<edit-text-question *ngSwitchCase="QuesType.Number" [ques]="q"></edit-text-question>
+						<edit-text-question *ngSwitchCase="QuesType.TypeAhead" [ques]="q"></edit-text-question>
+						<edit-text-question *ngSwitchCase="QuesType.Date" [ques]="q"></edit-text-question>
+						<edit-text-question *ngSwitchCase="QuesType.DateRange" [ques]="q"></edit-text-question>
+						<edit-scale-ques *ngSwitchCase="QuesType.Score" [ques]="q"></edit-scale-ques>
+						<iqnr-edit-file *ngSwitchCase="QuesType.Upload" [ques]="q"></iqnr-edit-file>
+						<iqnr-edit-file *ngSwitchCase="QuesType.ImgUpload" [ques]="q"></iqnr-edit-file>
+					</ng-container>
+				</div>
+				<ng-container *ngIf="q.bottomDragStyle" [ngTemplateOutlet]="dragEndStyle"></ng-container>
+			</ng-container>
+		</div>
+	</div>
+	<!-- import -->
+	<div class="import-wrap" style="color: 2672ff;">
+		<span class="tc"><i class="fa fa-file-word-o"></i>Import Questions</span>
+	</div>
+</div>
+
+<ng-template #dragTopStyle>
+	<div class="drag-append drag-top-style"></div>
+</ng-template>
+<ng-template #dragEndStyle>
+	<div class="drag-append drag-end-style"></div>
+</ng-template>

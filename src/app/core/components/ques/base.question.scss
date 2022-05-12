@@ -1,0 +1,53 @@
+:host .q-title-wrap {
+	width: 70%;
+	margin-bottom: 8px;
+	position: relative;
+	line-height: 32px;
+	.q-seq {
+		display: inline;
+		position: absolute;
+		vertical-align: top;
+		right: calc(100% - 10px);
+		.require {
+			vertical-align: middle;
+			font-size: 16px;
+			color: red;
+		}
+		.seq {
+			font-size: 14px;
+			vertical-align: middle;
+			color: #000;
+		}
+	}
+	.q-title {
+		width: 98%;
+		color: #484848;
+		font-size: 15px;
+		margin-left: 14px;
+		padding-left: 3px;
+		display: inline-block;
+		border: 1px solid rgb(244, 244, 244);
+		border-color:rgba(244, 244, 244, 0);
+
+		&.no-style {
+			color: #aaa;
+			width: 120%;
+			border-top: 1px dashed #aaa;
+		}
+
+		&[contenteditable=true] {
+			&:hover {
+				border: 1px dashed #aaa;
+			}
+		}
+		&:focus {
+			border-color:rgba(244, 244, 244, 1);
+			background-color: #f4f4f4;
+		}
+		::ng-deep {
+			a {
+				color: #2672ff;
+			}
+		}
+	}
+}

@@ -1,0 +1,23 @@
+<header>
+    <a href="javascript:void(0)">
+        <img src="./assets/images/logo.gif" class="img-fluid" alt="">
+    </a>
+    <ul class="ib head-list">
+        <li *ngFor="let o of navs" class="ib cur" [class.active]="o.active">
+            <a class="nav-item">{{ o.name }}</a>
+        </li>
+    </ul>
+    <div class="ib head-user">
+        <a class="help cur mr20">Help</a>
+        <a class="user cur" nz-popover nzPopoverPlacement="bottomLeft"
+            nzPopoverOverlayClassName="user-popover" nzPopoverTitle="userTitle" nzPopoverContent="userContent">
+            <img src="./assets/images/user.jpeg" class="img-fluid" alt="">
+        </a>
+        <ng-template #userTitle>Hello, {{ user.name }}</ng-template>
+        <ng-template #userContent>
+            <ul class="user-list">
+                <li *ngFor="let o of user.list" class="cur"><i class="fa {{ 'fa-' + o.icon }}" aria-hidden="true"></i>{{ o.name }}</li>
+            </ul>
+        </ng-template>
+    </div>
+</header>

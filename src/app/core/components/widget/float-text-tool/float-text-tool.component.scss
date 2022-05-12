@@ -1,0 +1,56 @@
+:host .text-float-tool {
+	position: absolute;
+	top: -36px;
+	left: 10px;
+    z-index: 50;
+    background: #FFF;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #eaeaea;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 10%);
+    cursor: pointer;
+
+	&>i.fa {
+		width: 40px;
+		font-size: 18px;
+		line-height: 32px;
+		height: 32px;
+		position: relative;
+		display: inline-block;
+		text-align: center;
+		vertical-align: middle;
+
+		&:hover {
+			color: #2672ff;
+		}
+		&:not(:last-child) {
+			&::after {
+				position: absolute;
+				right: 0px;
+				width: 1px;
+				font-size: 18px;
+				color: #c3b4b4;
+				content: "|";
+			}
+		}
+	}
+}
+
+::ng-deep {
+	.rich-text-modal {
+		.ant-modal-body {
+			min-height: 200px;
+		}
+	}
+	.float-text-tool-editor {
+		.tox-toolbar__primary {
+			background: none !important;
+			border-bottom: 1px solid #ccc;
+			// .tox-tbtn {
+			// 	width: 26px;
+			// 	height: 26px;
+			// }
+		}
+	}
+}

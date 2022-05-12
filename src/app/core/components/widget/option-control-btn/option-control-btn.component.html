@@ -1,0 +1,5 @@
+<div class="option-control-btns">
+	<i *ngIf="qType !== quesType.DropdownSelect && qType !== quesType.DropdownMultipleSelect"
+		class="fa fa-gear" nz-tooltip nzTooltipTitle="Setting"></i>
+	<i class="fa minus" nz-tooltip nzTooltipTitle="Remove" (click)="remove()"></i>
+</div>

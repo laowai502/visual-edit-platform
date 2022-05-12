@@ -1,0 +1,20 @@
+#noti-bar {
+    left: 0;
+    right: 0;
+    top: 64px;
+    z-index: 9;
+    height: 36px;
+    position: fixed;
+    padding-left: 100px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    background-color: #ecf1f6;
+    &>.noti-list {
+        color: #707070;
+        line-height: 36px;
+        a {
+            margin-left: 10px;
+            color: #2672ff;
+        }
+    }
+}
